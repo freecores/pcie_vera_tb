@@ -10,11 +10,14 @@
 // cmagleby@gutzlogic.com; cwinward@gutzlogic.com
 // ===========================================================================
 //
-// $Id: ti_phy_top.test_top.v,v 1.1.1.1 2007-12-05 18:37:07 cmagleby Exp $
+// $Id: ti_phy_top.test_top.v,v 1.2 2007-12-05 23:00:33 cmagleby Exp $
 //
 // ===========================================================================
 //
 // $Log: not supported by cvs2svn $
+// Revision 1.1.1.1  2007/12/05 18:37:07  cmagleby
+// importing tb files
+//
 //
 // ===========================================================================
 // Function : This is the top level testbench file.
@@ -22,7 +25,7 @@
 // ===========================================================================
 // ===========================================================================
 module ti_phy_top_test_top;
-   parameter simulation_cycle = 100;
+   parameter simulation_cycle = 8;
    
    reg 	     SystemClock;
    wire      clk_50mhz;
@@ -204,6 +207,52 @@ module ti_phy_top_test_top;
 	 end
       end
    end // always @ (posedge ti_phy_top_inst.clk_125mhz)
+   
+   /* -----\/----- EXCLUDED -----\/-----
+    idt71v25761s200 AUTO_TEMPLATE (
+				  .D	(sram_data[31:0]),
+				  .DP	(sram_data[35:32]),
+				  // Inputs
+				  .A	(sram_addr),
+				  .oe_	(sram_oen),
+				  .ce_	(sram_ce[0]),
+				  .cs0	(sram_ce[1]),
+				  .cs1_	(sram_ce[2]),
+				  .lbo_	(sram_mode),
+				  .gw_	(sram_gwn),
+				  .bwe_	(sram_wen),
+				  .bw4_	(sram_ben[3]),
+				  .bw3_	(sram_ben[2]),
+				  .bw2_	(sram_ben[1]),
+				  .bw1_	(sram_ben[0]),
+				  .adsp_(sram_adspn),
+				  .adsc_(sram_adscn),
+				  .adv_	(sram_advn),
+				  .clk	(sram_clk));
+    -----/\----- EXCLUDED -----/\----- */
+   
+   idt71v25761s200 SRAM_MODEL_inst (/*AUTOINST*/
+				    // Inouts
+				    .D	(sram_data[31:0]),	 // Templated
+				    .DP	(sram_data[35:32]),	 // Templated
+				    // Inputs
+				    .A	(sram_addr),		 // Templated
+				    .oe_	(sram_oen),		 // Templated
+				    .ce_	(sram_ce[0]),		 // Templated
+				    .cs0	(sram_ce[1]),		 // Templated
+				    .cs1_	(sram_ce[2]),		 // Templated
+				    .lbo_	(sram_mode),		 // Templated
+				    .gw_	(sram_gwn),		 // Templated
+				    .bwe_	(sram_wen),		 // Templated
+				    .bw4_	(sram_ben[3]),		 // Templated
+				    .bw3_	(sram_ben[2]),		 // Templated
+				    .bw2_	(sram_ben[1]),		 // Templated
+				    .bw1_	(sram_ben[0]),		 // Templated
+				    .adsp_(sram_adspn),		 // Templated
+				    .adsc_(sram_adscn),		 // Templated
+				    .adv_	(sram_advn),		 // Templated
+				    .clk	(sram_clk));		 // Templated
+   
 `endif
      
    initial begin
@@ -219,13 +268,14 @@ module ti_phy_top_test_top;
          SystemClock = ~SystemClock;       
       end
       
-   end
+   end // initial begin
    
+`ifdef REAL_RTL   
    initial begin
       $fsdbDumpfile("vera_test.fsdb");
       $fsdbDumpvars(dut);
    end
-   
+`endif
    
    
 endmodule
