@@ -9,11 +9,14 @@
 //
 // ===========================================================================
 //
-// $Id: ti_phy_top.if.vrh,v 1.1.1.1 2007-12-05 18:37:07 cmagleby Exp $
+// $Id: ti_phy_top.if.vrh,v 1.2 2008-01-15 03:25:07 cmagleby Exp $
 //
 // ===========================================================================
 //
 // $Log: not supported by cvs2svn $
+// Revision 1.1.1.1  2007/12/05 18:37:07  cmagleby
+// importing tb files
+//
 //
 // ===========================================================================
 // Function : .This is the interface file linking verilog with VERA
@@ -29,11 +32,11 @@
     output  		clk_50mhz	OUTPUT_EDGE OUTPUT_SKEW;
     output  [1:0]	PUSH_BUTTON	OUTPUT_EDGE OUTPUT_SKEW;
     output  		FPGA_RESET_n	OUTPUT_EDGE OUTPUT_SKEW;
+    output  		PERST_n         OUTPUT_EDGE OUTPUT_SKEW;
     output  [15:0]	rxdata16	OUTPUT_EDGE OUTPUT_SKEW;
     output  [1:0]	rxdatak16	OUTPUT_EDGE OUTPUT_SKEW;
     output  		rxvalid16	OUTPUT_EDGE OUTPUT_SKEW;
     output  		rxidle16	OUTPUT_EDGE OUTPUT_SKEW;
-    output  		rxidle	OUTPUT_EDGE OUTPUT_SKEW;
     output  [2:0]	rxstatus	OUTPUT_EDGE OUTPUT_SKEW;
     output  		phystatus	OUTPUT_EDGE OUTPUT_SKEW;
     input [7:0]	        LED	INPUT_EDGE  INPUT_SKEW;

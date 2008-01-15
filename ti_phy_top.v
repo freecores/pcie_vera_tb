@@ -11,11 +11,14 @@
 //
 // ===========================================================================
 //
-// $Id: ti_phy_top.v,v 1.1.1.1 2007-12-05 18:37:06 cmagleby Exp $
+// $Id: ti_phy_top.v,v 1.2 2008-01-15 03:25:07 cmagleby Exp $
 //
 // ===========================================================================
 //
 // $Log: not supported by cvs2svn $
+// Revision 1.1.1.1  2007/12/05 18:37:06  cmagleby
+// importing tb files
+//
 //
 // ===========================================================================
 // Function : This file is non-synthesizable rtl file to demonstrate TS1's.
@@ -33,8 +36,8 @@ module ti_phy_top (/*AUTOARG*/
    // Inouts
    sram_data, 
    // Inputs
-   clk_50mhz, PUSH_BUTTON, FPGA_RESET_n, rxclk, rxdata16, rxdatak16, 
-   rxvalid16, rxidle16, rxidle, rxstatus, phystatus
+   clk_50mhz, PUSH_BUTTON, FPGA_RESET_n, PERST_n, rxclk, rxdata16, 
+   rxdatak16, rxvalid16, rxidle16, rxidle, rxstatus, phystatus
    );
    //****************************************************************************************
    //TI PHY interface
@@ -45,6 +48,7 @@ module ti_phy_top (/*AUTOARG*/
    output [7:0]   LED;
    reg [7:0] 	  LED;
    input 	  FPGA_RESET_n;
+   input 	  PERST_n;
    //****************************************************************************************
    //Phillips PHY interface
    output 	  txclk;		//source synch 250 Mhz transmit clock from MAC.

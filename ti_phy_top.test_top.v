@@ -10,11 +10,14 @@
 // cmagleby@gutzlogic.com; cwinward@gutzlogic.com
 // ===========================================================================
 //
-// $Id: ti_phy_top.test_top.v,v 1.2 2007-12-05 23:00:33 cmagleby Exp $
+// $Id: ti_phy_top.test_top.v,v 1.3 2008-01-15 03:25:07 cmagleby Exp $
 //
 // ===========================================================================
 //
 // $Log: not supported by cvs2svn $
+// Revision 1.2  2007/12/05 23:00:33  cmagleby
+// add sram for real rtl
+//
 // Revision 1.1.1.1  2007/12/05 18:37:07  cmagleby
 // importing tb files
 //
@@ -24,6 +27,7 @@
 //
 // ===========================================================================
 // ===========================================================================
+`timescale 1 ns/100 ps
 module ti_phy_top_test_top;
    parameter simulation_cycle = 8;
    
@@ -31,12 +35,12 @@ module ti_phy_top_test_top;
    wire      clk_50mhz;
    wire [1:0] PUSH_BUTTON;
    wire       FPGA_RESET_n;
+   wire       PERST_n;
    wire       rxclk;
    wire [15:0] rxdata16;
    wire [1:0]  rxdatak16;
    wire        rxvalid16;
    wire        rxidle16;
-   wire        rxidle;
    wire [2:0]  rxstatus;
    wire        phystatus;
    wire [7:0]  LED;
@@ -63,6 +67,7 @@ module ti_phy_top_test_top;
    wire        sram_zz;
    wire [35:0] sram_data;
    assign      rxclk = SystemClock;
+   assign      PERST_n = FPGA_RESET_n;
 	       
 `ifdef SYNOPSYS_NTB
 	       ti_phy_top_test vshell(
@@ -70,12 +75,12 @@ module ti_phy_top_test_top;
 				      .\ti_phy_top.clk_50mhz	(clk_50mhz),
 				      .\ti_phy_top.PUSH_BUTTON	(PUSH_BUTTON),
 				      .\ti_phy_top.FPGA_RESET_n	(FPGA_RESET_n),
+				      .\ti_phy_top.PERST_n	(PERST_n),
 				      .\ti_phy_top.rxclk	(rxclk),
 				      .\ti_phy_top.rxdata16	(rxdata16),
 				      .\ti_phy_top.rxdatak16	(rxdatak16),
 				      .\ti_phy_top.rxvalid16	(rxvalid16),
 				      .\ti_phy_top.rxidle16	(rxidle16),
-				      .\ti_phy_top.rxidle	(rxidle),
 				      .\ti_phy_top.rxstatus	(rxstatus),
 				      .\ti_phy_top.phystatus	(phystatus),
 				      .\ti_phy_top.sram_data	(sram_data),
@@ -108,13 +113,12 @@ module ti_phy_top_test_top;
 		     .SystemClock (SystemClock),
 		     .ti_phy_top_clk_50mhz	(clk_50mhz),
 		     .ti_phy_top_PUSH_BUTTON	(PUSH_BUTTON),
-		     .ti_phy_top_FPGA_RESET_n	(FPGA_RESET_n),
+		     .ti_phy_top_FPGA_RESET_n	(FPGA_RESET_),
 		     .ti_phy_top_rxclk	(rxclk),
 		     .ti_phy_top_rxdata16	(rxdata16),
 		     .ti_phy_top_rxdatak16	(rxdatak16),
 		     .ti_phy_top_rxvalid16	(rxvalid16),
 		     .ti_phy_top_rxidle16	(rxidle16),
-		     .ti_phy_top_rxidle	(rxidle),
 		     .ti_phy_top_rxstatus	(rxstatus),
 		     .ti_phy_top_phystatus	(phystatus),
 		     .ti_phy_top_sram_data	(sram_data),
@@ -152,12 +156,12 @@ module ti_phy_top_test_top;
 		  .clk_50mhz	(clk_50mhz),
 		  .PUSH_BUTTON	(PUSH_BUTTON),
 		  .FPGA_RESET_n	(FPGA_RESET_n),
+		  .PERST_n      (PERST_n),
 		  .rxclk	(rxclk),
 		  .rxdata16	(rxdata16),
 		  .rxdatak16	(rxdatak16),
 		  .rxvalid16	(rxvalid16),
 		  .rxidle16	(rxidle16),
-		  .rxidle	(rxidle),
 		  .rxstatus	(rxstatus),
 		  .phystatus	(phystatus),
 		  .sram_data	(sram_data),
